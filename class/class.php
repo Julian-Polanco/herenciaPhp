@@ -2,20 +2,13 @@
     require_once("connect.php");
 
     class Students extends Connect_server{
-        private $data1=array();
-        private $data2=array();
-        private $value="";
-        private $connect;
-        public function __construct(){
-            $this->connect = new Connect_server();
-            $this->connect =  $this->connect->connect();
-        } 
+        private $list=array();
         public function getData(){
-            $sql = "SELECT * FROM datos";
-            $execute= $this->connect->query($sql);
+            $query = "SELECT * FROM datos";
+            $execute = $this->connectServer->query($query);
             while ($response=$execute->fetchAll(PDO::FETCH_ASSOC)){
-                $this->data1[]=$response;                
+                $this->list[]=$response;                
             }
-            return $this->data1;
+            return $this->list;
         }
     }
