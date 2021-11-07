@@ -32,18 +32,18 @@ $students = $objStudents->getData();
             foreach($students as $fila){
                 ?>    
                 <tr>
-                    <td> <?php echo $fila["cedula"]; ?></td>
-                    <td> <?php echo $fila["nombre"]; ?></td>
-                    <td> <?php echo $fila["direccion"]; ?></td>
-                    <td> <?php echo $fila["telefono"]; ?></td>
+                    <td> <?= $fila["cedula"]; ?></td>
+                    <td> <?= $fila["nombre"]; ?></td>
+                    <td> <?= $fila["direccion"]; ?></td>
+                    <td> <?= $fila["telefono"]; ?></td>
                     <td>
                         <form id='formDelete' >
-                            <input type='hidden' name='cedula' value='<?php echo $fila["cedula"]; ?>'>
+                            <input type='hidden' name='cedula' value='<?= $fila["cedula"]; ?>'>
                             <input type='hidden' name='TipoConsulta' value='Eliminar'>
-                            <button class="btn btn-danger" id="BtnEliminar" type="button" name="BtnEliminar"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-danger" id="btnDelete" type="button" name="btnDelete"><i class="fa fa-trash"></i></button>
                         </form>
                     </td>
-                    <td> <a href=actualizar.php?cedula=<?php echo $fila['cedula']; ?>>Actualizar</a></td>
+                    <td> <a href=actualizar.php?cedula=<?= $fila['cedula']; ?>>Actualizar</a></td>
                 </tr>
 
 
@@ -56,7 +56,7 @@ $students = $objStudents->getData();
 
             <script>
                 $(document).ready(function() {
-                    $('#BtnEliminar').click(function(e) {
+                    $('#btnDelete').click(function(e) {
                         e.preventDefault();
                         var datosElimina = $('#formDelete').serialize();
                         console.log(datosElimina);
