@@ -71,8 +71,7 @@ print_r($students);
                                         title: 'Registro eliminado correctamente',
                                         timer: 3000,
                                         timerProgressBar: true,
-                                    })
-                                    setTimeout('document.location.reload()', 3000);
+                                    })                                   
                                 } else {
                                     alert('¡error!');
                                     Swal.fire({
@@ -81,8 +80,7 @@ print_r($students);
                                         text: 'Algo salio mal',
                                         timer: 3000,
                                         timerProgressBar: true,
-                                    })
-                                    setTimeout('document.location.reload()', 3000);
+                                    })                                   
                                 }
                             }
                         });
