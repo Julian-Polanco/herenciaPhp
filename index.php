@@ -2,7 +2,6 @@
 require_once("class/class.php");
 $objStudents = new Students;
 $students = $objStudents->getData();
-print_r($students);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,22 +29,24 @@ print_r($students);
         </thead>
         <tbody>
             <?php
-            for ($i = 0; $i < count($students[0]); $i++) {
-            ?>
+            foreach($students as $fila){
+                ?>    
                 <tr>
-                    <td> <?php echo $students[0][$i]["cedula"]; ?></td>
-                    <td> <?php echo $students[0][$i]["nombre"]; ?></td>
-                    <td> <?php echo $students[0][$i]["direccion"]; ?></td>
-                    <td> <?php echo $students[0][$i]["telefono"]; ?></td>
+                    <td> <?php echo $fila["cedula"]; ?></td>
+                    <td> <?php echo $fila["nombre"]; ?></td>
+                    <td> <?php echo $fila["direccion"]; ?></td>
+                    <td> <?php echo $fila["telefono"]; ?></td>
                     <td>
                         <form id='formDelete' >
-                            <input type='hidden' name='cedula' value='<?php echo $students[0][$i]["cedula"]; ?>'>
+                            <input type='hidden' name='cedula' value='<?php echo $fila["cedula"]; ?>'>
                             <input type='hidden' name='TipoConsulta' value='Eliminar'>
                             <button class="btn btn-danger" id="BtnEliminar" type="button" name="BtnEliminar"><i class="fa fa-trash"></i></button>
                         </form>
                     </td>
-                    <td> <a href=actualizar.php?cedula=<?php echo $students[0][$i]['cedula']; ?>>Actualizar</a></td>
+                    <td> <a href=actualizar.php?cedula=<?php echo $fila['cedula']; ?>>Actualizar</a></td>
                 </tr>
+
+
             <?php
             }
             ?>
