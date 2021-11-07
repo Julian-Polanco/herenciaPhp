@@ -70,23 +70,31 @@ $students = $objStudents->getData();
         </thead>
         <tbody>
             <?php
-            foreach ($students as $fila) {
+            foreach ($students as $row) {
             ?>
                 <tr>
-                    <td> <?= $fila["id_estudiante"]; ?></td>
-                    <td> <?= $fila["Nombre_estudiante"]; ?></td>
-                    <td> <?= $fila["Apellido_estud"]; ?></td>
-                    <td> <?= $fila["direccion_est"]; ?></td>
-                    <td> <?= $fila["telefono_est"]; ?></td>
-                    <td> <?= $fila["acudiente"]; ?></td>
-                    <td> <?= $fila["grupo_est"]; ?></td>
+                    <td> <?= $row["id_estudiante"]; ?></td>
+                    <td> <?= $row["Nombre_estudiante"]; ?></td>
+                    <td> <?= $row["Apellido_estud"]; ?></td>
+                    <td> <?= $row["direccion_est"]; ?></td>
+                    <td> <?= $row["telefono_est"]; ?></td>
+                    <td> <?= $row["acudiente"]; ?></td>
+                    <td> <?= $row["grupo_est"]; ?></td>
                     <td>
                         <form id='formDelete' class='d-inline'>
-                            <input type='hidden' name='cedula' value='<?= $fila["id_estudiante"]; ?>'>
-                            <input type='hidden' name='TipoConsulta' value='Eliminar'>
-                            <button class="btn btn-danger d-" id="btnDelete" type="button" name="btnDelete" title="Eliminar"><i class="fa fa-trash"></i></button>
+                            <input type='hidden' name='numDoc' value='<?= $row["id_estudiante"]; ?>'>
+                            <button class="btn btn-danger" id="btnDelete" type="button" name="btnDelete" title="Eliminar"><i class="fa fa-trash"></i></button>
                         </form>
-                        <button class="btn btn-primary d-inline" id="btnUpdate" title="Actualizar"><i class="fa fa-fas fa-edit"></i></button>
+                        <form action="formUpdate.php" method="post" class='d-inline'>
+                        <input type='hidden' name='id_estudiante' value='<?= $row["id_estudiante"]; ?>'>
+                        <input type='hidden' name='Nombre_estudiante' value='<?= $row["Nombre_estudiante"]; ?>'>
+                        <input type='hidden' name='Apellido_estud' value='<?= $row["Apellido_estud"]; ?>'>
+                        <input type='hidden' name='direccion_est' value='<?= $row["direccion_est"]; ?>'>
+                        <input type='hidden' name='telefono_est' value='<?= $row["telefono_est"]; ?>'>
+                        <input type='hidden' name='acudiente' value='<?= $row["acudiente"]; ?>'>
+                        <input type='hidden' name='grupo_est' value='<?= $row["grupo_est"]; ?>'>
+                        <button class="btn btn-primary" id="btnUpdate" title="Actualizar"><i class="fa fa-fas fa-edit"></i></button>
+                        </form>
                     </td>
                 </tr>
 
@@ -132,15 +140,15 @@ $students = $objStudents->getData();
                 $(document).ready(function() {
                     $('#btnDelete').click(function(e) {
                         e.preventDefault();
-                        var datosElimina = $('#formDelete').serialize();
-                        console.log(datosElimina);
+                        var numdoc = $('#formDelete').serialize();
+                        console.log(numdoc);
                         $.ajax({
                             type: 'POST',
-                            url: 'Crud.php',
-                            data: datosElimina,
-                            success: function(elimina) {
-                                console.log(elimina);
-                                if (elimina == 1) {
+                            url: 'class/delete.php',
+                            data: numdoc,
+                            success: function(response) {
+                                console.log(response+typeof(response));
+                                if (response === "1") {
                                     Swal.fire({
                                         icon: 'success',
                                         title: 'Registro eliminado correctamente',
