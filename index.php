@@ -83,7 +83,7 @@ $students = $objStudents->getData();
                     <td>
                         <form id='formDelete' class='d-inline'>
                             <input type='hidden' name='numDoc' value='<?= $row["id_estudiante"]; ?>'>
-                            <button class="btn btn-danger" id="btnDelete" type="button" name="btnDelete" title="Eliminar"><i class="fa fa-trash"></i></button>
+                            <button class="btn btn-danger" id="btnDelete" type="submit" name="btnDelete" title="Eliminar"><i class="fa fa-trash"></i></button>
                         </form>
                         <form action="formUpdate.php" method="post" class='d-inline'>
                         <input type='hidden' name='id_estudiante' value='<?= $row["id_estudiante"]; ?>'>
@@ -138,8 +138,8 @@ $students = $objStudents->getData();
             </script>
             <script>
                 $(document).ready(function() {
-                    $('#btnDelete').click(function(e) {
-                        e.preventDefault();
+                    $(document).on('submit', '#formDelete', function(event) {
+                        event.preventDefault();
                         var numdoc = $('#formDelete').serialize();
                         console.log(numdoc);
                         $.ajax({
